@@ -1,6 +1,10 @@
 import Image from "next/image";
-import Search from "@/images/Search.png" 
-import Link from "next/link";
+import Link from 'next/link'
+import Article from '@/images/Article.png'
+import communicate from '@/images/Communicate.png'
+import Badge from '@/images/Profile Badges_ 2b31e583-03f4-47bd-b406-5eba2bf79072.png'
+import Global from '@/images/Global Connecti 770a56d2-46ae-435d-abb7-3c33115e9ba8.png'
+import Skill from '@/images/Skill.png'
 
 export default function Widget() {
   return (
@@ -10,11 +14,11 @@ export default function Widget() {
         <nav className="absolute top-0 left-0 w-full flex justify-between items-center p-4 md:p-6 z-20">
           <div className="text-white text-xl md:text-2xl font-bold">ConnectAll</div>
           <div className="flex items-center space-x-4 md:space-x-6 text-white">
-            <Link href="#profile" className="hover:underline">Profile</Link>
-            <Link href="#search" className="hover:underline">Search</Link>
-            <Link href="#groups" className="hover:underline">Groups</Link>
-            <a href="#projects" className="hover:underline">Projects</a>
-            <Link href="auth/register" className="bg-green-500 text-white px-3 py-1 md:px-4 md:py-2 rounded-full hover:bg-green-600">Join Now</Link>
+          <Link href="/profile" className="hover:underline">Profile</Link>
+            <Link href="/search" className="hover:underline">Search</Link>
+            <Link href="/groups" className="hover:underline">Groups</Link>
+            <Link href="/projects" className="hover:underline">Projects</Link>
+            <Link href="/join" className="bg-green-500 text-white px-3 py-1 md:px-4 md:py-2 rounded-full hover:bg-green-600">Join Now</Link>
           </div>
         </nav>
         <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-start p-4 md:p-6 space-y-4">
@@ -22,7 +26,7 @@ export default function Widget() {
             Connect.<br />Showcase.<br />Collaborate.<br />Succeed.
           </h1>
           <p className="text-white text-base md:text-lg">Integrate profiles, showcase skills, collaborate seamlessly, and grow together.</p>
-          <Link href="#" className="bg-green-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-green-600">Join Now</Link>
+          <Link href="/login" className="bg-green-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full hover:bg-green-600">Join Now</Link>
         </div>
       </div>
 
@@ -92,34 +96,177 @@ export default function Widget() {
               <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-0">Boost Your Professional Network</h2>
               <p className="text-lg md:text-xl text-zinc-300">Showcase projects and skills to the community, fostering recognition and valuable networking.</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <img src="https://placehold.co/600x400" alt="Person with magnifying glass" className="w-full h-auto rounded-lg"/>
-              </div>
-              <div>
-                <img src="https://placehold.co/600x400" alt="Love to Learn sign" className="w-full h-auto rounded-lg"/>
-              </div>
-              <div>
-                <img src="https://placehold.co/600x400" alt="Hands together" className="w-full h-auto rounded-lg"/>
-              </div>
+            <div className="bg-zinc-900 p-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="relative">
+            <Image
+            src={communicate}
+            alt="Person with magnifying glass"
+            width={600}
+            height={400}
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+            </div>
+            <div className="relative">
+            <Image
+            src={communicate}
+            alt="Person with magnifying glass"
+            width={600}
+            height={400}
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+            </div>
+            <div className="relative">
+            <Image
+            src={Article}
+            alt="Person with magnifying glass"
+            width={900}
+            height={600}
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+              
+             
+            </div>
+            <div className="relative">
+            <Image
+            src={Skill}
+            
+            alt="Person with magnifying glass"
+            width={900}
+            height={600}
+            className="w-full h-auto rounded-lg shadow-lg"
+            
+          />
+              
+            </div>
+            <div className="relative">
+            <Image
+            src={Badge}
+            alt="Person with magnifying glass"
+            width={900}
+            height={600}
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
+          
+              
+            </div>
+            <div className="relative">
+            <Image
+            src={Global}
+            alt="Person with magnifying glass"
+            width={600}
+            height={400}
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
             </div>
           </div>
         </div>
+          </div>
+        </div>
+        <div className="bg-white dark:bg-zinc-800 py-8 px-4">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
+        <div className="md:col-span-2">
+          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">SkillConnect</h2>
+          <p className="mt-2 text-zinc-600 dark:text-zinc-300">
+            Connect, Collaborate, Grow Together
+          </p>
+          <Link href="/login">
+          <button className="mt-4 bg-green-500 text-white py-2 px-4 rounded-lg">Join Now</button>
+          </Link>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Company</h3>
+          <ul className="mt-2 space-y-2">
+            <li>
+              <Link href="/about" className="text-zinc-600 dark:text-zinc-300">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link href="/careers" className="text-zinc-600 dark:text-zinc-300">
+                Careers
+              </Link>
+            </li>
+            <li>
+              <Link href="/team" className="text-zinc-600 dark:text-zinc-300">
+                Team
+              </Link>
+            </li>
+            <li>
+              <Link href="/news" className="text-zinc-600 dark:text-zinc-300">
+                News
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Resources</h3>
+          <ul className="mt-2 space-y-2">
+            <li>
+              <Link href="/blog" className="text-zinc-600 dark:text-zinc-300">
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link href="/webinar" className="text-zinc-600 dark:text-zinc-300">
+                Webinars
+              </Link>
+            </li>
+            <li>
+              <Link href="/event" className="text-zinc-600 dark:text-zinc-300">
+                Events
+              </Link>
+            </li>
+            <li>
+              <Link href="/guide" className="text-zinc-600 dark:text-zinc-300">
+                Guides
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Support</h3>
+          <ul className="mt-2 space-y-2">
+            <li>
+              <Link href="/help" className="text-zinc-600 dark:text-zinc-300">
+                Help Center
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="text-zinc-600 dark:text-zinc-300">
+                Contact
+              </Link>
+            </li>
+            <li>
+              <Link href="FAQ" className="text-zinc-600 dark:text-zinc-300">
+                FAQ
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Contact us</h3>
+          <p className="mt-2 text-zinc-600 dark:text-zinc-300">support@skillconnect.com</p>
+          <p className="text-zinc-600 dark:text-zinc-300">123-456-7890</p>
+          <div className="mt-4 flex space-x-4">
+            <Link href="/insta" className="text-zinc-600 dark:text-zinc-300">
+              <img src="https://placehold.co/24x24" alt="Instagram" />
+            </Link>
+            <Link href="#" className="text-zinc-600 dark:text-zinc-300">
+              <img src="https://placehold.co/24x24" alt="Twitter" />
+            </Link>
+            <Link href="#" className="text-zinc-600 dark:text-zinc-300">
+              <img src="https://placehold.co/24x24" alt="Facebook" />
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="mt-8 text-center text-zinc-600 dark:text-zinc-300">
+        © 2024 SkillConnect, we love our users!
+      </div>
+    </div>
       
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="relative w-full md:w-1/2">
-            <img src="https://placehold.co/600x400" alt="Feature 1" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center p-4">
-              <span className="text-white text-sm">Feature</span>
-              <h2 className="text-white text-2xl md:text-3xl font-bold">Validate Expertise with Certificates</h2>
-            </div>
-          </div>
-          <div className="relative w-full md:w-1/2">
-            {/* <img src={Search} alt="Feature 2" className="w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center p-4">
-              */}
-            </div>
-          </div>
+        
         </div>
  
       
