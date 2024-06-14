@@ -64,5 +64,5 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: "Name is required",
   }),
-  birthday:z.date(),
+  birthday:z.string() || z.date(),
 });

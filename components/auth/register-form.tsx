@@ -1,51 +1,65 @@
 "use client";
-
-import * as z from "zod";
+import CardWrapper from "./card-wrapper";
 import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-
+import * as z from "zod";
+import { useForm, Controller } from "react-hook-form";
 import { RegisterSchema } from "@/schemas";
-import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,  
+  FormMessage,
 } from "@/components/ui/form";
-import { CardWrapper } from "@/components/auth/card-wrapper"
-import { Button } from "@/components/ui/button";
-import { FormError } from "@/components/form-error";
-import { FormSuccess } from "@/components/form-success";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
-
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
       email: "",
       password: "",
       name: "",
-      birthday: "",  // Default value for birthday
+      birthday: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const onSubmit = async (values: z.infer<typeof RegisterSchema>) => {
     setError("");
     setSuccess("");
-    
+
+    // Check if birthday is valid before converting
+    if (!values.birthday) {
+      setError("Birthday is required");
+      return;
+    }
+
+    // Attempt to parse the birthday string to ensure it's a valid date
+    const birthdayDate = new Date(values.birthday);
+
+    // Check if the parsed date is invalid
+    if (isNaN(birthdayDate.getTime())) {
+      setError("Invalid birthday format");
+      return;
+    }
+
+    // Convert birthday to ISO-8601 format
+    const isoFormattedBirthday = birthdayDate.toISOString();
+
     startTransition(() => {
-      register(values)
-        .then((data) => {
-          setError(data.error);
-          setSuccess(data.success);
-        });
+      register({ ...values, birthday: isoFormattedBirthday }).then((data) => {
+        setError(data.error);
+        setSuccess(data.success);
+      });
     });
   };
 
@@ -57,10 +71,7 @@ export const RegisterForm = () => {
       showSocial
     >
       <Form {...form}>
-        <form 
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="space-y-4">
             <FormField
               control={form.control}
@@ -69,11 +80,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="John Doe"
-                    />
+                    <Input {...field} disabled={isPending} placeholder="John Doe" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -86,12 +93,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="john.doe@example.com"
-                      type="email"
-                    />
+                    <Input {...field} disabled={isPending} placeholder="john.doe@example.com" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,12 +106,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="******"
-                      type="password"
-                    />
+                    <Input {...field} disabled={isPending} placeholder="******" type="password" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -120,14 +117,9 @@ export const RegisterForm = () => {
               name="birthday"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Birthday</FormLabel>
+                  <FormLabel>Date of Birth</FormLabel>
                   <FormControl>
-                    <Input
-                      {...field}
-                      disabled={isPending}
-                      placeholder="YYYY-MM-DD"
-                      type="date"
-                    />
+                    <Input {...field} disabled={isPending} type="date" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -136,11 +128,7 @@ export const RegisterForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button
-            disabled={isPending}
-            type="submit"
-            className="w-full"
-          >
+          <Button disabled={isPending} type="submit" className="w-full">
             Create an account
           </Button>
         </form>
